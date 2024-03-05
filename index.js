@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("./models/product.model.js");
@@ -18,13 +19,10 @@ app.get("/", function (req, res) {
 /*########################## connecting the mongodb ##########################*/
 
 mongoose
-  .connect(
-    // Node-API is collection name
-    "mongodb+srv://vishwajitpatil570:LB9gtDiDy06PRWqd@backenddb.ymf5elj.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB"
-  )
+  .connect(process.env.DATABASE_URL)
   .then(() => {
     console.log("Connected to database!");
-    app.listen(3000, () => {
+    app.listen(process.env.PORT, () => {
       console.log("server is running on port 3000");
     });
   })
